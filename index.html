@@ -15,7 +15,8 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
             position: relative;
         }
 
@@ -48,12 +49,8 @@
         .container {
             position: relative;
             z-index: 2;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            display: block;
+            padding: 50px 20px 150px 20px;
             text-align: center;
         }
 
@@ -70,6 +67,7 @@
             transform: translateY(50px);
             opacity: 0;
             animation: slideUp 1s ease-out forwards;
+            margin: 0 auto;
         }
 
         @keyframes slideUp {
@@ -172,6 +170,12 @@
             background: linear-gradient(45deg, #ffecd2, #fcb69f);
             color: #333;
             box-shadow: 0 10px 20px rgba(255, 236, 210, 0.3);
+        }
+
+        .btn-music {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
         }
 
         .btn:hover {
@@ -289,6 +293,7 @@
             width: 90%;
             position: relative;
             color: white;
+            pointer-events: auto;
         }
 
         .close {
@@ -304,6 +309,55 @@
             font-size: 1.3rem;
             line-height: 1.6;
             margin: 20px 0;
+        }
+
+        /* Surprise gift section */
+        .surprise-gift {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+            animation: giftGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes giftGlow {
+            0% { box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3); }
+            100% { box-shadow: 0 10px 35px rgba(255, 107, 107, 0.6); }
+        }
+
+        /* DANA button */
+        .dana-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #00d4ff, #00a8cc);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+            border: 2px solid #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            animation: danaPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes danaPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .dana-button:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.5);
+            background: linear-gradient(45deg, #00a8cc, #00d4ff);
+        }
+
+        .dana-button:active {
+            transform: translateY(-1px) scale(1.08);
         }
 
         /* Fireworks effect - now photo gallery */
@@ -459,54 +513,12 @@
             }
         }
 
-        /* YouTube player styling */
-        .music-player {
-            margin: 30px 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transform: scale(0);
-            animation: musicPlayerAppear 1s ease-out 2s forwards;
-            display: none; /* Hide the video player */
-        }
-
-        @keyframes musicPlayerAppear {
-            to { transform: scale(1); }
-        }
-
-        .music-title {
-            color: white;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .youtube-container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .youtube-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-        }
-
-        @media (max-width: 768px) {
-            .music-player {
-                margin: 20px 0;
-                padding: 15px;
-            }
+        /* Remove all audio control styles */
+        .audio-controls,
+        .audio-button,
+        .volume-control,
+        .volume-slider {
+            display: none !important;
         }
     </style>
 </head>
@@ -519,7 +531,7 @@
         <div class="hero">
             <h1 class="birthday-title">
                 Happy Birthday
-                <span class="name-highlight">JOSRIKO ORLANDO</span>
+                <span class="name-highlight">SAYANG KU</span>
             </h1>
             
             <div class="date-badge">
@@ -531,29 +543,22 @@
             </div>
             
             <p class="birthday-message">
-                Semoga di hari ulang tahun yang istimewa ini, semua impian dan harapanmu terwujud! 
-                Selamat menambah usia, semoga panjang umur, sehat selalu, dan bahagia terus!
+                Selamat ulang tahun untuk orang tersayang di hidupku! 💕<br>
+                Semoga hari ini jadi hari yang paling spesial buat kamu.<br>
+                Aku sayang banget sama kamu dan berharap kita bisa terus bersama.<br>
+                Happy birthday my love! 🎂❤️
             </p>
 
-            <!-- YouTube Music Player -->
-            <div class="music-player">
-                <div class="youtube-container">
-                    <iframe src="https://www.youtube.com/embed/fC1oLEKfLMw?autoplay=1&mute=0&loop=1&playlist=fC1oLEKfLMw&controls=0&showinfo=0&rel=0&modestbranding=1&si=BbNZS5hgPW6ZGy2Y" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            referrerpolicy="strict-origin-when-cross-origin" 
-                            allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
+            <!-- Remove all audio controls completely -->
+
+            <!-- Remove YouTube player completely -->
             
             <div class="action-buttons">
                 <button class="btn btn-primary" onclick="showWish()">
-                    Baca Ucapan Spesial
+                    💕 Baca Pesan Cinta
                 </button>
                 <button class="btn btn-secondary" onclick="showPhotos()">
-                    Lihat Foto
+                    📸 Lihat Foto Kita
                 </button>
             </div>
         </div>
@@ -563,20 +568,30 @@
     <div id="wishModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Ucapan Spesial Untukmu</h2>
+            <h2>💕 Pesan Cinta Buat Kamu</h2>
             <div class="wish-text">
-                Josriko Orlando yang luar biasa!<br><br>
+                Happy Birthday Sayang! 🎂❤️<br><br>
                 
-                Di hari istimewa ini, kami ingin mengucapkan selamat ulang tahun yang penuh kebahagiaan! 
-                Semoga tahun baru kehidupanmu dipenuhi dengan:
-                <br><br>
-                Kesehatan yang prima<br>
-                Rezeki yang melimpah<br>
-                Cinta dan kebahagiaan<br>
-                Kesuksesan dalam segala hal<br>
-                Hari-hari yang penuh warna<br><br>
+                Hari ini adalah hari yang paling spesial karena kamu lahir ke dunia.<br>
+                Aku bersyukur banget bisa kenal dan punya kamu di hidup aku.<br><br>
                 
-                Keep shining and stay awesome!
+                Untuk tahun yang baru ini, aku doain:<br>
+                • Kamu selalu sehat dan bahagia 💪<br>
+                • Semua impian kamu terwujud ✨<br>
+                • Kita makin sayang dan lengket terus 🥰<br>
+                • Rejeki kamu makin lancar 💰<br>
+                • Selalu dilindungi sama Yang Atas 🙏<br><br>
+                
+                I love you so much sayang! 💕<br>
+                You mean everything to me! 👫💖<br><br>
+                
+                <div class="surprise-gift">
+                    🎁 Ada hadiah kecil buat kamu sayang! 🎁<br>
+                    Jangan lupa ambil ya, ini dari hati ❤️<br><br>
+                    <a href="https://link.dana.id/ambil?c=s52luat4z&r=fHzPW2" target="_blank" class="dana-button">
+                        💰 AMBIL HADIAH DANA 💰
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -585,11 +600,11 @@
     <div id="photoGallery" class="photo-gallery">
         <div class="gallery-close" onclick="closePhotoGallery()">&times;</div>
         <div class="gallery-container">
-            <img src="1.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
-            <img src="2.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
-            <img src="3.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
-            <img src="4.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
-            <img src="5.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="1.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="2.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="3.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="4.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="5.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
         </div>
     </div>
 
@@ -598,48 +613,17 @@
         <div class="close-photo" onclick="closePhotoModal()">&times;</div>
         <img id="modalPhoto" src="" alt="Josriko Orlando">
     </div>
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Ucapan Spesial Untukmu</h2>
-            <div class="wish-text">
-                Josriko Orlando yang luar biasa!<br><br>
-                
-                Di hari istimewa ini, kami ingin mengucapkan selamat ulang tahun yang penuh kebahagiaan! 
-                Semoga tahun baru kehidupanmu dipenuhi dengan:
-                <br><br>
-                Kesehatan yang prima<br>
-                Rezeki yang melimpah<br>
-                Cinta dan kebahagiaan<br>
-                Kesuksesan dalam segala hal<br>
-                Hari-hari yang penuh warna<br><br>
-                
-                Keep shining and stay awesome!
-            </div>
-        </div>
-    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="birthdayAudio" preload="auto" loop>
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+        <!-- Fallback untuk browser yang tidak support -->
+    </audio>
 
     <script>
-        // Create floating particles
-        function createParticles() {
-            const particles = document.getElementById('particles');
-            setInterval(() => {
-                if (document.querySelectorAll('.particle').length < 20) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
-                    particle.style.animationDelay = Math.random() * 2 + 's';
-                    particle.style.animationDuration = Math.random() * 3 + 3 + 's';
-                    particles.appendChild(particle);
-                    
-                    setTimeout(() => {
-                        if (particle.parentNode) {
-                            particle.parentNode.removeChild(particle);
-                        }
-                    }, 6000);
-                }
-            }, 300);
-        }
+        // Remove all music control functions
+        let isPlaying = true;
+        let musicPlayerVisible = false;
 
         // Blow candles effect
         function blowCandles() {
@@ -684,12 +668,9 @@
             document.getElementById('wishModal').style.display = 'none';
         }
 
-        // Show photos with flying effect (replacing fireworks)
+        // Show photos with flying effect
         function showPhotos() {
-            // First create flying photo effect
             createFlyingPhotos();
-            
-            // Then show photo gallery after a delay
             setTimeout(() => {
                 document.getElementById('photoGallery').style.display = 'flex';
             }, 2000);
@@ -697,7 +678,13 @@
 
         // Create flying photos effect
         function createFlyingPhotos() {
-            const photos = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
+            const photos = [
+                '1.JPG',
+                '2.JPG', 
+                '3.JPG',
+                '4.JPG',
+                '5.JPG'
+            ];
             
             for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
@@ -709,7 +696,6 @@
                     photo.style.animation = 'photoFly 3s ease-out forwards';
                     photo.style.pointerEvents = 'auto';
                     
-                    // Make flying photos clickable
                     photo.onclick = function() {
                         openPhotoModal(this.src);
                     };
@@ -725,17 +711,12 @@
             }
         }
 
-        // Open photo gallery
-        function openPhotoGallery() {
-            document.getElementById('photoGallery').style.display = 'flex';
-        }
-
         // Close photo gallery
         function closePhotoGallery() {
             document.getElementById('photoGallery').style.display = 'none';
         }
 
-        // Open photo modal (fullscreen view)
+        // Open photo modal
         function openPhotoModal(src) {
             document.getElementById('modalPhoto').src = src;
             document.getElementById('photoModal').style.display = 'flex';
@@ -746,37 +727,122 @@
             document.getElementById('photoModal').style.display = 'none';
         }
 
-        // Create fireworks (keeping for backward compatibility)
-        function createFireworks() {
-            showPhotos();
+        // Remove music control functions - keep only toggle function
+        function toggleMusic() {
+            // Do nothing - music plays automatically
         }
 
-        // Scroll to music player
-        function scrollToMusic() {
-            const musicPlayer = document.querySelector('.music-player');
-            musicPlayer.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'center'
+        // Create floating particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            setInterval(() => {
+                if (document.querySelectorAll('.particle').length < 20) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particle.style.animationDuration = Math.random() * 3 + 3 + 's';
+                    particles.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 6000);
+                }
+            }, 300);
+        }
+
+        // Play birthday tune using Web Audio API (no controls)
+        function playBirthdayTune() {
+            // Create audio context
+            if (!window.audioContext) {
+                window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            const ctx = window.audioContext;
+            
+            // Create gain node with fixed volume
+            window.gainNode = ctx.createGain();
+            window.gainNode.connect(ctx.destination);
+            window.gainNode.gain.value = 0.25; // Fixed volume level
+
+            // Happy Birthday melody notes (complete song)
+            const notes = [
+                // "Happy Birthday to you"
+                { freq: 261.63, duration: 0.75 }, // C
+                { freq: 261.63, duration: 0.25 }, // C
+                { freq: 293.66, duration: 1 },    // D
+                { freq: 261.63, duration: 1 },    // C
+                { freq: 349.23, duration: 1 },    // F
+                { freq: 329.63, duration: 2 },    // E
+                
+                // "Happy Birthday to you"
+                { freq: 261.63, duration: 0.75 }, // C
+                { freq: 261.63, duration: 0.25 }, // C
+                { freq: 293.66, duration: 1 },    // D
+                { freq: 261.63, duration: 1 },    // C
+                { freq: 392.00, duration: 1 },    // G
+                { freq: 349.23, duration: 2 },    // F
+                
+                // "Happy Birthday dear sayang"
+                { freq: 261.63, duration: 0.75 }, // C
+                { freq: 261.63, duration: 0.25 }, // C
+                { freq: 523.25, duration: 1 },    // C (high)
+                { freq: 440.00, duration: 1 },    // A
+                { freq: 349.23, duration: 1 },    // F
+                { freq: 329.63, duration: 1 },    // E
+                { freq: 293.66, duration: 2 },    // D
+                
+                // "Happy Birthday to you"
+                { freq: 466.16, duration: 0.75 }, // Bb
+                { freq: 466.16, duration: 0.25 }, // Bb
+                { freq: 440.00, duration: 1 },    // A
+                { freq: 349.23, duration: 1 },    // F
+                { freq: 392.00, duration: 1 },    // G
+                { freq: 349.23, duration: 2 }     // F
+            ];
+
+            let currentTime = ctx.currentTime;
+
+            notes.forEach((note, index) => {
+                const oscillator = ctx.createOscillator();
+                const noteGain = ctx.createGain();
+
+                oscillator.connect(noteGain);
+                noteGain.connect(window.gainNode);
+
+                oscillator.frequency.value = note.freq;
+                oscillator.type = 'sine';
+
+                // Envelope for smooth sound
+                noteGain.gain.setValueAtTime(0, currentTime);
+                noteGain.gain.linearRampToValueAtTime(0.2, currentTime + 0.1);
+                noteGain.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+
+                oscillator.start(currentTime);
+                oscillator.stop(currentTime + note.duration);
+
+                currentTime += note.duration;
             });
-            
-            // Add glow effect
-            musicPlayer.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.5)';
-            musicPlayer.style.transform = 'scale(1.05)';
-            
-            setTimeout(() => {
-                musicPlayer.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
-                musicPlayer.style.transform = 'scale(1)';
-            }, 2000);
-        }
 
-        // Play birthday music (visual feedback) - keeping for backward compatibility
-        function playMusic() {
-            scrollToMusic();
+            // Auto-repeat after melody finishes with a pause
+            setTimeout(() => {
+                if (isPlaying) {
+                    playBirthdayTune();
+                }
+            }, (currentTime - ctx.currentTime) * 1000 + 3000); // 3 second pause between repeats
         }
 
         // Initialize
         window.addEventListener('load', () => {
             createParticles();
+            
+            // Auto start music after 2 seconds
+            setTimeout(() => {
+                autoStartMusic();
+            }, 2000);
             
             // Add pulse animation to body
             const style = document.createElement('style');
@@ -788,6 +854,51 @@
             `;
             document.head.appendChild(style);
         });
+
+        // Auto start music function (simplified)
+        function autoStartMusic() {
+            // Create and play birthday tune automatically
+            playBirthdayTune();
+            isPlaying = true;
+            
+            // Show simple notification without controls
+            showMusicNotification();
+        }
+
+        // Show music notification (simplified)
+        function showMusicNotification() {
+            const notification = document.createElement('div');
+            notification.innerHTML = '🎵 Musik cinta sedang diputar untuk mu sayang! 💕';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                font-size: 1rem;
+                font-weight: bold;
+                z-index: 1001;
+                box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+                animation: slideInRight 0.5s ease-out;
+                max-width: 300px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto hide after 4 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideInRight 0.5s ease-out reverse';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }
+            }, 4000);
+        }
 
         // Close modal when clicking outside
         window.onclick = function(event) {
@@ -806,7 +917,17 @@
             }
         }
 
-        // Add keyboard support
+        // Prevent modal from closing when clicking on modal content
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalContents = document.querySelectorAll('.modal-content, .gallery-container, .photo-modal img');
+            modalContents.forEach(content => {
+                content.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        });
+
+        // Add keyboard support (remove music controls)
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
