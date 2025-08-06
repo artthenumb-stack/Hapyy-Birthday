@@ -306,12 +306,41 @@
             margin: 20px 0;
         }
 
-        /* Fireworks effect */
-        .firework {
+        /* Fireworks effect - now photo gallery */
+        .photo {
             position: fixed;
-            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
             pointer-events: none;
             z-index: 999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid white;
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes photoFly {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         @keyframes explode {
@@ -322,6 +351,111 @@
             100% {
                 transform: scale(4);
                 opacity: 0;
+            }
+        }
+
+        /* Photo modal */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .photo-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 5px solid white;
+        }
+
+        .photo-modal .close-photo {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Photo gallery grid */
+        .photo-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1500;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .gallery-photo {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 3px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .gallery-photo {
+                height: 150px;
             }
         }
 
@@ -384,12 +518,12 @@
     <div class="container">
         <div class="hero">
             <h1 class="birthday-title">
-                🎉 Happy Birthday 🎂
+                Happy Birthday
                 <span class="name-highlight">JOSRIKO ORLANDO</span>
             </h1>
             
             <div class="date-badge">
-                📅 7 Agustus 2025
+                7 Agustus 2025
             </div>
             
             <div class="cake-container">
@@ -398,13 +532,13 @@
             
             <p class="birthday-message">
                 Semoga di hari ulang tahun yang istimewa ini, semua impian dan harapanmu terwujud! 
-                Selamat menambah usia, semoga panjang umur, sehat selalu, dan bahagia terus! 🎈✨
+                Selamat menambah usia, semoga panjang umur, sehat selalu, dan bahagia terus!
             </p>
 
             <!-- YouTube Music Player -->
             <div class="music-player">
                 <div class="youtube-container">
-                    <iframe src="https://www.youtube.com/embed/fC1oLEKfLMw?autoplay=1&mute=0&loop=1&playlist=fC1oLEKfLMw&si=bjgC79yhc3QNA2C4" 
+                    <iframe src="https://www.youtube.com/embed/fC1oLEKfLMw?autoplay=1&mute=0&loop=1&playlist=fC1oLEKfLMw&controls=0&showinfo=0&rel=0&modestbranding=1&si=BbNZS5hgPW6ZGy2Y" 
                             title="YouTube video player" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -416,10 +550,10 @@
             
             <div class="action-buttons">
                 <button class="btn btn-primary" onclick="showWish()">
-                    💌 Baca Ucapan Spesial
+                    Baca Ucapan Spesial
                 </button>
-                <button class="btn btn-secondary" onclick="createFireworks()">
-                    🎆 Kembang Api
+                <button class="btn btn-secondary" onclick="showPhotos()">
+                    Lihat Foto
                 </button>
             </div>
         </div>
@@ -429,20 +563,57 @@
     <div id="wishModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2>🌟 Ucapan Spesial Untukmu 🌟</h2>
+            <h2>Ucapan Spesial Untukmu</h2>
             <div class="wish-text">
-                Josriko Orlando yang luar biasa! 🎊<br><br>
+                Josriko Orlando yang luar biasa!<br><br>
                 
                 Di hari istimewa ini, kami ingin mengucapkan selamat ulang tahun yang penuh kebahagiaan! 
                 Semoga tahun baru kehidupanmu dipenuhi dengan:
                 <br><br>
-                ✨ Kesehatan yang prima<br>
-                💰 Rezeki yang melimpah<br>
-                💕 Cinta dan kebahagiaan<br>
-                🚀 Kesuksesan dalam segala hal<br>
-                🌈 Hari-hari yang penuh warna<br><br>
+                Kesehatan yang prima<br>
+                Rezeki yang melimpah<br>
+                Cinta dan kebahagiaan<br>
+                Kesuksesan dalam segala hal<br>
+                Hari-hari yang penuh warna<br><br>
                 
-                Keep shining and stay awesome! 🌟
+                Keep shining and stay awesome!
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Gallery Modal -->
+    <div id="photoGallery" class="photo-gallery">
+        <div class="gallery-close" onclick="closePhotoGallery()">&times;</div>
+        <div class="gallery-container">
+            <img src="1.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="2.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="3.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="4.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="5.jpg" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+        </div>
+    </div>
+
+    <!-- Photo Modal -->
+    <div id="photoModal" class="photo-modal">
+        <div class="close-photo" onclick="closePhotoModal()">&times;</div>
+        <img id="modalPhoto" src="" alt="Josriko Orlando">
+    </div>
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Ucapan Spesial Untukmu</h2>
+            <div class="wish-text">
+                Josriko Orlando yang luar biasa!<br><br>
+                
+                Di hari istimewa ini, kami ingin mengucapkan selamat ulang tahun yang penuh kebahagiaan! 
+                Semoga tahun baru kehidupanmu dipenuhi dengan:
+                <br><br>
+                Kesehatan yang prima<br>
+                Rezeki yang melimpah<br>
+                Cinta dan kebahagiaan<br>
+                Kesuksesan dalam segala hal<br>
+                Hari-hari yang penuh warna<br><br>
+                
+                Keep shining and stay awesome!
             </div>
         </div>
     </div>
@@ -513,28 +684,71 @@
             document.getElementById('wishModal').style.display = 'none';
         }
 
-        // Create fireworks
-        function createFireworks() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#ff7675', '#74b9ff'];
+        // Show photos with flying effect (replacing fireworks)
+        function showPhotos() {
+            // First create flying photo effect
+            createFlyingPhotos();
             
-            for (let i = 0; i < 15; i++) {
+            // Then show photo gallery after a delay
+            setTimeout(() => {
+                document.getElementById('photoGallery').style.display = 'flex';
+            }, 2000);
+        }
+
+        // Create flying photos effect
+        function createFlyingPhotos() {
+            const photos = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
+            
+            for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
-                    const firework = document.createElement('div');
-                    firework.className = 'firework';
-                    firework.style.left = Math.random() * window.innerWidth + 'px';
-                    firework.style.top = Math.random() * window.innerHeight + 'px';
-                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    firework.style.width = firework.style.height = '20px';
-                    firework.style.animation = 'explode 1s ease-out forwards';
-                    document.body.appendChild(firework);
+                    const photo = document.createElement('img');
+                    photo.className = 'photo';
+                    photo.src = photos[Math.floor(Math.random() * photos.length)];
+                    photo.style.left = Math.random() * window.innerWidth + 'px';
+                    photo.style.top = Math.random() * window.innerHeight + 'px';
+                    photo.style.animation = 'photoFly 3s ease-out forwards';
+                    photo.style.pointerEvents = 'auto';
+                    
+                    // Make flying photos clickable
+                    photo.onclick = function() {
+                        openPhotoModal(this.src);
+                    };
+                    
+                    document.body.appendChild(photo);
                     
                     setTimeout(() => {
-                        if (firework.parentNode) {
-                            firework.parentNode.removeChild(firework);
+                        if (photo.parentNode) {
+                            photo.parentNode.removeChild(photo);
                         }
-                    }, 1000);
+                    }, 3000);
                 }, i * 200);
             }
+        }
+
+        // Open photo gallery
+        function openPhotoGallery() {
+            document.getElementById('photoGallery').style.display = 'flex';
+        }
+
+        // Close photo gallery
+        function closePhotoGallery() {
+            document.getElementById('photoGallery').style.display = 'none';
+        }
+
+        // Open photo modal (fullscreen view)
+        function openPhotoModal(src) {
+            document.getElementById('modalPhoto').src = src;
+            document.getElementById('photoModal').style.display = 'flex';
+        }
+
+        // Close photo modal
+        function closePhotoModal() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // Create fireworks (keeping for backward compatibility)
+        function createFireworks() {
+            showPhotos();
         }
 
         // Scroll to music player
@@ -577,9 +791,18 @@
 
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('wishModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
+            const wishModal = document.getElementById('wishModal');
+            const photoGallery = document.getElementById('photoGallery');
+            const photoModal = document.getElementById('photoModal');
+            
+            if (event.target === wishModal) {
+                wishModal.style.display = 'none';
+            }
+            if (event.target === photoGallery) {
+                photoGallery.style.display = 'none';
+            }
+            if (event.target === photoModal) {
+                photoModal.style.display = 'none';
             }
         }
 
@@ -587,6 +810,8 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
+                closePhotoGallery();
+                closePhotoModal();
             }
         });
     </script>
