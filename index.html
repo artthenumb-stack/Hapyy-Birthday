@@ -268,6 +268,43 @@
                 width: 100%;
                 max-width: 250px;
             }
+
+            .modal {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 50px;
+            }
+
+            .modal-content {
+                padding: 25px;
+                max-height: 80vh;
+                width: 95%;
+            }
+
+            .wish-text {
+                font-size: 1.1rem;
+            }
+
+            .surprise-gift {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .dana-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .gallery-photo {
+                height: 150px;
+            }
         }
 
         /* Wish modal */
@@ -282,6 +319,8 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            overflow-y: auto;
         }
 
         .modal-content {
@@ -294,6 +333,9 @@
             position: relative;
             color: white;
             pointer-events: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: auto;
         }
 
         .close {
@@ -332,10 +374,10 @@
             display: inline-block;
             background: linear-gradient(45deg, #00d4ff, #00a8cc);
             color: white;
-            padding: 15px 30px;
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 25px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             margin-top: 10px;
             transition: all 0.3s ease;
@@ -343,6 +385,7 @@
             border: 2px solid #ffffff;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             animation: danaPulse 3s ease-in-out infinite;
+            min-width: 140px;
         }
 
         @keyframes danaPulse {
@@ -511,6 +554,10 @@
             .gallery-photo {
                 height: 150px;
             }
+
+            .photo-gallery {
+                padding: 10px;
+            }
         }
 
         /* Remove all audio control styles */
@@ -555,10 +602,10 @@
             
             <div class="action-buttons">
                 <button class="btn btn-primary" onclick="showWish()">
-                    Baca Ya sayang
+                    💕 Baca Pesan Cinta
                 </button>
                 <button class="btn btn-secondary" onclick="showPhotos()">
-                     Coba Kamu Lihat
+                    📸 Lihat Foto Kita
                 </button>
             </div>
         </div>
@@ -589,7 +636,7 @@
                     🎁 Ada hadiah kecil buat kamu sayang! 🎁<br>
                     Jangan lupa ambil ya, ini dari hati ❤️<br><br>
                     <a href="https://link.dana.id/ambil?c=s52luat4z&r=fHzPW2" target="_blank" class="dana-button">
-                        Hadiah Kamu
+                        Hadiah Buat Kamuuuuu
                     </a>
                 </div>
             </div>
@@ -602,9 +649,9 @@
         <div class="gallery-container">
             <img src="1.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
             <img src="2.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
-            <img src="3.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
-            <img src="4.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
-            <img src="5.JPG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="3.PNG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="4.PNG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
+            <img src="5.PNG" class="gallery-photo" onclick="openPhotoModal(this.src)" alt="Josriko Orlando">
         </div>
     </div>
 
@@ -659,14 +706,8 @@
         }
 
         // Show wish modal
-        function showWish() {
-            document.getElementById('wishModal').style.display = 'flex';
-        }
 
         // Close modal
-        function closeModal() {
-            document.getElementById('wishModal').style.display = 'none';
-        }
 
         // Show photos with flying effect
         function showPhotos() {
@@ -900,7 +941,7 @@
             }, 4000);
         }
 
-        // Close modal when clicking outside
+        // Close modal when clicking outside (improved for mobile)
         window.onclick = function(event) {
             const wishModal = document.getElementById('wishModal');
             const photoGallery = document.getElementById('photoGallery');
@@ -915,6 +956,18 @@
             if (event.target === photoModal) {
                 photoModal.style.display = 'none';
             }
+        }
+
+        // Prevent body scroll when modal is open
+        function showWish() {
+            document.getElementById('wishModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal (improved)
+        function closeModal() {
+            document.getElementById('wishModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         // Prevent modal from closing when clicking on modal content
